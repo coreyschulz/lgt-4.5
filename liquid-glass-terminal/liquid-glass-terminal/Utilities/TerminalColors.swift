@@ -171,9 +171,9 @@ struct TerminalFont {
         return size.width
     }
 
-    /// Line height for this font
+    /// Line height for this font (tight spacing for terminal use)
     var lineHeight: CGFloat {
         let font = nsFont
-        return font.ascender - font.descender + font.leading
+        return font.ascender - font.descender  // No leading for tight terminal spacing
     }
 }

@@ -9,25 +9,25 @@ import SwiftUI
 
 /// Status bar showing shell status and terminal dimensions
 struct StatusBarView: View {
-    @ObservedObject var viewModel: TerminalViewModel
+    var state: TerminalState
 
     var body: some View {
         HStack(spacing: 12) {
             // Shell status indicator
             ShellStatusPill(
-                isRunning: viewModel.isRunning,
-                shellName: viewModel.shellName
+                isRunning: state.isRunning,
+                shellName: state.shellName
             )
 
             Spacer()
 
             // Action buttons (moved from toolbar)
-            ActionButtonsPill(viewModel: viewModel)
+            ActionButtonsPill(state: state)
 
             // Terminal dimensions
             DimensionsPill(
-                rows: viewModel.rows,
-                columns: viewModel.columns
+                rows: state.rows,
+                columns: state.columns
             )
         }
         .padding(.horizontal, 12)
@@ -77,11 +77,11 @@ struct DimensionsPill: View {
 
 /// Pill with action buttons (Clear and Restart)
 struct ActionButtonsPill: View {
-    @ObservedObject var viewModel: TerminalViewModel
+    var state: TerminalState
 
     var body: some View {
         HStack(spacing: 8) {
-            Button(action: { viewModel.clear() }) {
+            Button(action: { state.clear() }) {
                 Image(systemName: "trash")
                     .font(.system(size: 11))
             }
@@ -89,7 +89,7 @@ struct ActionButtonsPill: View {
             .foregroundStyle(.secondary)
             .help("Clear terminal (⌘K)")
 
-            Button(action: { viewModel.restartShell() }) {
+            Button(action: { state.restart() }) {
                 Image(systemName: "arrow.clockwise")
                     .font(.system(size: 11))
             }
@@ -106,7 +106,7 @@ struct ActionButtonsPill: View {
 #Preview {
     VStack {
         Spacer()
-        StatusBarView(viewModel: TerminalViewModel())
+        StatusBarView(state: TerminalState())
     }
     .frame(width: 600, height: 100)
     .background(Color.black.opacity(0.3))

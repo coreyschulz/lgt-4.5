@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		89A42AB82ED5045F00A768E7 /* SwiftTerm in Frameworks */ = {isa = PBXBuildFile; productRef = 89A42AB72ED5045F00A768E7 /* SwiftTerm */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		89A429A72ED4EEBE00A768E7 /* liquid-glass-terminal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "liquid-glass-terminal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89A42AB82ED5045F00A768E7 /* SwiftTerm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = "liquid-glass-terminal";
 			packageProductDependencies = (
+				89A42AB72ED5045F00A768E7 /* SwiftTerm */,
 			);
 			productName = "liquid-glass-terminal";
 			productReference = 89A429A72ED4EEBE00A768E7 /* liquid-glass-terminal.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 89A4299E2ED4EEBE00A768E7;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				89A42AB62ED5045F00A768E7 /* XCRemoteSwiftPackageReference "SwiftTerm" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 89A429A82ED4EEBE00A768E7 /* Products */;
 			projectDirPath = "";
@@ -325,6 +334,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		89A42AB62ED5045F00A768E7 /* XCRemoteSwiftPackageReference "SwiftTerm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/migueldeicaza/SwiftTerm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		89A42AB72ED5045F00A768E7 /* SwiftTerm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 89A42AB62ED5045F00A768E7 /* XCRemoteSwiftPackageReference "SwiftTerm" */;
+			productName = SwiftTerm;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 89A4299F2ED4EEBE00A768E7 /* Project object */;
 }
