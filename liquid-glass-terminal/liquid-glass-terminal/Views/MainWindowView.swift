@@ -14,6 +14,11 @@ struct MainWindowView: View {
     @State private var isHoveringTopArea = false
     @State private var isHoveringBottomArea = false
 
+    /// Glass effect settings from environment
+    @Environment(\.glassSettings) var glassSettings
+    /// Open window action for opening playground
+    @Environment(\.openWindow) private var openWindow
+
     /// Safe area height for traffic lights (close/minimize/zoom buttons)
     private let trafficLightSafeArea: CGFloat = 28
     /// Height of the hover detection area at bottom
@@ -64,9 +69,13 @@ struct MainWindowView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     hideTrafficLights()
                 }
+                // Open playground window on launch
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    openWindow(id: "playground")
+                }
             }
         }
-        .glassEffect(.regular, in: .rect)  // Rectangular edge-to-edge glass
+        .dynamicGlassEffect(glassSettings)  // Dynamic glass effect from playground settings
         .ignoresSafeArea()
         .frame(minWidth: 400, minHeight: 300)
     }
@@ -88,5 +97,6 @@ struct MainWindowView: View {
 
 #Preview {
     MainWindowView()
+        .environment(\.glassSettings, GlassEffectSettings())
         .frame(width: 800, height: 600)
 }

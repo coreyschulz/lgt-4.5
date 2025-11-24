@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct LiquidGlassTerminalApp: App {
+    /// Shared glass effect settings - single source of truth
+    @State private var glassSettings = GlassEffectSettings.load()
+
     var body: some Scene {
+        // Main Terminal Window
         WindowGroup {
             MainWindowView()
+                .environment(\.glassSettings, glassSettings)
         }
         .windowStyle(.hiddenTitleBar)
         .windowBackgroundDragBehavior(.enabled)
@@ -29,7 +34,24 @@ struct LiquidGlassTerminalApp: App {
                 }
                 .keyboardShortcut("r", modifiers: [.command, .shift])
             }
+
+            // Playground menu command
+            CommandGroup(after: .windowArrangement) {
+                Button("Show Glass Playground") {
+                    NotificationCenter.default.post(name: .showPlayground, object: nil)
+                }
+                .keyboardShortcut("p", modifiers: [.command, .shift])
+            }
         }
+
+        // Glass Playground Window
+        Window("Glass Playground", id: "playground") {
+            PlaygroundWindowView()
+                .environment(\.glassSettings, glassSettings)
+        }
+        .windowStyle(.hiddenTitleBar)
+        .defaultSize(width: 420, height: 850)
+        .defaultPosition(.topTrailing)
     }
 }
 
@@ -38,4 +60,5 @@ struct LiquidGlassTerminalApp: App {
 extension Notification.Name {
     static let clearTerminal = Notification.Name("clearTerminal")
     static let restartShell = Notification.Name("restartShell")
+    static let showPlayground = Notification.Name("showPlayground")
 }
