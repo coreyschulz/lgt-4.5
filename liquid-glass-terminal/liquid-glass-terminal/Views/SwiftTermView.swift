@@ -32,6 +32,17 @@ class TransparentTerminalView: LocalProcessTerminalView {
         layer?.isOpaque = false
         // Set the native background color to clear
         nativeBackgroundColor = .clear
+        // Hide the scroller
+        hideScroller()
+    }
+
+    private func hideScroller() {
+        // Find and hide the NSScroller subview that SwiftTerm adds
+        for subview in subviews {
+            if let scroller = subview as? NSScroller {
+                scroller.isHidden = true
+            }
+        }
     }
 
     // Override to prevent SwiftTerm from setting layer background to black
@@ -39,6 +50,8 @@ class TransparentTerminalView: LocalProcessTerminalView {
         super.viewDidMoveToWindow()
         // Reset layer background after SwiftTerm's setup
         layer?.backgroundColor = CGColor.clear
+        // Ensure scroller stays hidden after SwiftTerm's setup
+        hideScroller()
     }
 }
 
